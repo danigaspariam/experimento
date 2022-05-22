@@ -1,3 +1,5 @@
+Não esquecer de rodar NPM INSTALL para baixar o node modules 
+
 # Experimento
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
