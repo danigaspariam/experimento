@@ -1,0 +1,134 @@
+<div class="d-flex justify-content-center mb-5 mt-5">
+     <h1> Cadastramento de novo usuário</h1>
+</div>
+<div class="container ">
+     <div class="row justify-content-md-center">
+          <div class="col-9 ">
+               <form action="https://formsubmit.co/danigaspariam@gmail.com"
+                    method="POST">
+                    <div class="row">
+                         <div class="form-group col-md-6"
+                              [formGroup]="form">
+
+                              <label for="inputNome">Nome</label>
+                              <input type="text"
+                                   class="form-control"
+                                   id="inputNome"
+                                   placeholder="Insira o seu nome"
+                                   formControlName="nome"
+                                   required>
+                              <div [ngClass]="{'invalid': nome?.invalid}"
+                                   *ngIf="nome?.touched && nome?.invalid">
+                                   {{getErrorMessage(form.get('nome'))}}
+                              </div>
+                         </div>
+
+                         <div class="form-group col-md-6"
+                              [formGroup]="form">
+                              <label for="inputSobrenome">Sobrenome</label>
+                              <input type="text"
+                                   class="form-control"
+                                   id="inputSobrenome"
+                                   placeholder="Insira seu sobrenome"
+                                   formControlName="sobrenome"
+                                   required>
+                              <div [ngClass]="{'invalid': sobrenome?.invalid}"
+                                   *ngIf="sobrenome?.touched && sobrenome?.invalid">
+                                   {{getErrorMessage(form.get('sobrenome'))}}
+                              </div>
+                         </div>
+                    </div>
+                    <div class="row mt-3">
+                         <div class="form-group col-md-6"
+                              [formGroup]="form">
+                              <label for="inputEmail">Email</label>
+                              <input type="email"
+                                   class="form-control"
+                                   id="inputEmail"
+                                   placeholder="Email"
+                                   formControlName="email"
+                                   required>
+                              <div [ngClass]="{'invalid': email?.invalid}"
+                                   *ngIf="email?.touched && email?.invalid">
+                                   {{getErrorMessage(form.get('email'))}}
+                              </div>
+                         </div>
+                         <div class="form-group col-md-2"
+                              [formGroup]="form">
+                              <label for="inputId">ID</label>
+                              <input type="text"
+                                   class="form-control"
+                                   id="inputId"
+                                   placeholder="Insira seu ID"
+                                   formControlName="id"
+                                   required>
+                              <div [ngClass]="{'invalid': id?.invalid}"
+                                   *ngIf="id?.touched && id?.invalid">
+                                   {{getErrorMessage(form.get('id'))}}
+                              </div>
+                         </div>
+                         <div class="form-group col-md-4"
+                              [formGroup]="form">
+                              Data de nascimento
+                              <div class="form-group">
+                                   <div class="input-group">
+                                        <input class="form-control"
+                                             placeholder="dd/mm/aaaa"
+                                             name="dp"
+                                             ngbDatepicker
+                                             #d="ngbDatepicker"
+                                             formControlName="dtNascimento"
+                                             required>
+                                        <div class="input-group-append">
+                                             <button
+                                                  class="btn btn-outline-secondary calendar"
+                                                  (click)="d.toggle()"
+                                                  type="button">
+                                                  <i
+                                                       class="fa-solid fa-calendar-days"></i></button>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div [ngClass]="{'invalid': dtNascimento?.invalid}"
+                                   *ngIf="dtNascimento?.touched && dtNascimento?.invalid">
+                                   Informe a data de nascimento.
+                              </div>
+                         </div>
+                    </div>
+                    <button type="submit"
+                         class="btn btn-primary mt-5"
+                         (click)="gravar()">Cadastro</button>
+               </form>
+          </div>
+     </div>
+</div>
+
+<div class="container mt-5">
+     <table class="table table-striped">
+          <thead>
+               <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Sobrenome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Ação</th>
+               </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let form of pessoas; index as i">
+                    <th scope="row">{{ this.form.id }}</th>
+                    <td>{{ this.form.nome }}</td>
+                    <td>{{ this.form.sobrenome }}</td>
+                    <td>{{ this.form.email }}</td>
+                    <td><button type="button"
+                              class="btn btn-outline-danger"
+                              (click)="excluirPessoa(pessoas, i)">Excluir</button>
+                         <button type="button"
+                              class="btn btn-outline-info btInfo"
+                              (click)="editFormPerson(form)">Editar</button>
+                    </td>
+               </tr>
+          </tbody>
+     </table>
+
+</div>
