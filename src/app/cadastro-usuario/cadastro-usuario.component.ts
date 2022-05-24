@@ -12,7 +12,10 @@ import {Validations} from '../utils/validators';
 })
 export class CadastroUsuarioComponent implements OnInit {
   form: FormGroup;
-  pessoas: any[] = [];
+  usuarios: any[] = [];
+  ShowEditTable: boolean = false;
+  EditRowId: any = '';
+  isEdit: number;
 
   @Input() editablePropertyKey: string;
 
@@ -32,22 +35,44 @@ export class CadastroUsuarioComponent implements OnInit {
 
 
   gravar() {
-    if (this.form.valid) {
-      return this.pessoas.push(this.form.value);
-
+    if (this.isEdit !== undefined) {
+      this.usuarios[this.isEdit] = this.form.value;
+      return undefined
+    } if (this.form.valid && this.usuarios.filter((el) => el.id === this.form.value.id).length === 0) {
+      this.isEdit = undefined;
+      return this.usuarios.push(this.form.value);
     } return Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Você não preencheu todos os campos corretamente!',
+      text: 'Você não preencheu todos os campos corretamente! Lembre-se, o ID deve ser único!',
     })
   }
 
-  public excluirPessoa(pessoas: any[], i: number) {
-    this.pessoas.splice(i, 1)
+  public excluirPessoa(i: number) {
+    this.usuarios.splice(i, 1)
   }
 
-  public editFormPerson(form: any): void {
-    this.form[this.editablePropertyKey] = null;
+  // public salvarPessoa() {
+  //   return this.usuarios.values()
+  // }
+
+  public edit(val) {
+    this.EditRowId = val;
+  }
+
+  // public filtrarUsuario() {
+  //   this.usuarios.filter((usuario) => {
+  //     usuario.nome == 'Daniele'
+  //   })
+  // }
+
+  public editFormPerson(i: number): void {
+    const usuario = this.usuarios[i]
+
+    this.isEdit = i;
+    this.form.setValue(usuario);
+    //ao clicar no botão de cadastro, atualizar os dados NA POSIÇÃO do array que estou editando 
+
   }
 
   get nome() {

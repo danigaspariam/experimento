@@ -4,8 +4,7 @@
 <div class="container ">
      <div class="row justify-content-md-center">
           <div class="col-9 ">
-               <form action="https://formsubmit.co/danigaspariam@gmail.com"
-                    method="POST">
+               <form>
                     <div class="row">
                          <div class="form-group col-md-6"
                               [formGroup]="form">
@@ -53,10 +52,12 @@
                                    {{getErrorMessage(form.get('email'))}}
                               </div>
                          </div>
+
                          <div class="form-group col-md-2"
                               [formGroup]="form">
                               <label for="inputId">ID</label>
-                              <input type="text"
+                              <input [readonly]="isEdit !== undefined"
+                                   type="text"
                                    class="form-control"
                                    id="inputId"
                                    placeholder="Insira seu ID"
@@ -103,7 +104,8 @@
      </div>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-5"
+     ng-controller="EditableRowCtrl">
      <table class="table table-striped">
           <thead>
                <tr>
@@ -115,18 +117,19 @@
                </tr>
           </thead>
           <tbody>
-               <tr *ngFor="let form of pessoas; index as i">
-                    <th scope="row">{{ this.form.id }}</th>
-                    <td>{{ this.form.nome }}</td>
-                    <td>{{ this.form.sobrenome }}</td>
-                    <td>{{ this.form.email }}</td>
+               <tr *ngFor="let pessoa of usuarios; index as i">
+                    <th scope="row">{{ this.pessoa.id }}</th>
+                    <td>{{ this.pessoa.nome }}</td>
+                    <td>{{ this.pessoa.sobrenome }}</td>
+                    <td>{{ this.pessoa.email }}</td>
                     <td><button type="button"
                               class="btn btn-outline-danger"
-                              (click)="excluirPessoa(pessoas, i)">Excluir</button>
+                              (click)="excluirPessoa(i)">Excluir</button>
                          <button type="button"
-                              class="btn btn-outline-info btInfo"
-                              (click)="editFormPerson(form)">Editar</button>
+                              class="btn btn-outline-info"
+                              (click)="editFormPerson(i)">Editar</button>
                     </td>
+
                </tr>
           </tbody>
      </table>

@@ -9,7 +9,6 @@ import {AppComponent} from './app.component';
 import {CadastroUsuarioComponent} from './cadastro-usuario/cadastro-usuario.component';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
-import { TabelaCadastradosComponent } from './tabela-cadastrados/tabela-cadastrados.component';
 
 registerLocaleData(localePtBr, "pt", localePtBr);
 
@@ -20,7 +19,6 @@ registerLocaleData(localePtBr, "pt", localePtBr);
     CadastroUsuarioComponent,
     HeaderComponent,
     FooterComponent,
-    TabelaCadastradosComponent
   ],
   imports: [
     BrowserModule,
